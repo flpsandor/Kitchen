@@ -43,6 +43,9 @@ public class Application {
         recipe5.addIngredientInRecipe("mleko", 0.1);
 
 
+        Database.addFavoriteRecipe("omlet");
+
+
         Scanner sc = new Scanner(System.in);
         boolean isTrue = false;
         while (!isTrue) {
@@ -80,6 +83,12 @@ public class Application {
                     System.out.print("Unesi 1 za smanjenje kolicine, 2 za potpuno brisanje:");
                     switch (sc.nextInt()){
                         case 1:
+                            sc.nextLine();
+                            System.out.print("Unesi namirnicu: ");
+                            ingredientName = sc.nextLine();
+                            System.out.print("Unesi vrednost za smanjenje: ");
+                            weight = sc.nextDouble();
+                            Database.subtractIngredientWeight(Database.getIngredient(ingredientName), weight);
                             break;
                         case 2:
                             sc.nextLine();
@@ -90,6 +99,15 @@ public class Application {
                         default:
                             System.out.println("Nepravilan unos");
                             continue;
+                    }
+                    continue;
+                case 7:
+
+                    continue;
+                case 15:
+                    System.out.println("OMILJENI RECEPTI");
+                    for(var recipe: Database.getAllFavoriteRecipe()){
+                        System.out.println(recipe.getRecipeName());
                     }
                     continue;
                 default:

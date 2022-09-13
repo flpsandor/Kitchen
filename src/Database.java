@@ -12,6 +12,16 @@ public class Database {
         }
     }
 
+    public static void subtractIngredientWeight(WeightedIngredient ingredient, Double value){
+        var weight = ingredient.getWeight();
+        ingredient.setWeight(weight-value);
+    }
+
+    public static void additionIngredientWeight(WeightedIngredient ingredient, Double value){
+        var weight = ingredient.getWeight();
+        ingredient.setWeight(weight+value);
+    }
+
     public static Recipe getFavoriteRecipe(String recipeName) {
         for (var recipe : favoriteRecipeList) {
             if (recipeName.equalsIgnoreCase(recipe.getRecipeName())) {
@@ -21,11 +31,11 @@ public class Database {
         return null;
     }
 
-    private static void removeFavoriteRecipe(String recipeName) {
+    public static void removeFavoriteRecipe(String recipeName) {
         favoriteRecipeList.removeIf(recipe -> recipeName.equalsIgnoreCase(recipe.getRecipeName()));
     }
 
-    private static void addFavoriteRecipe(String recipeName) {
+    public static void addFavoriteRecipe(String recipeName) {
         for (var recipe : recipeListInDatabase) {
             if (recipeName.equalsIgnoreCase(recipe.getRecipeName()) && !favoriteRecipeList.contains(recipe)){
                 favoriteRecipeList.add(recipe);
@@ -47,13 +57,13 @@ public class Database {
     }
 
     public static void addIngredient(WeightedIngredient ingredient) {
-        if (!ingredientListInDatabase.contains(ingredient.getIngredientName())) {
+        if (!ingredientListInDatabase.contains(ingredient.ingredientName)) {
             ingredientListInDatabase.add(ingredient);
             Fridge.addInFridge(ingredient);
         } else {
             for (var item : ingredientListInDatabase) {
                 if (ingredient.ingredientName.equalsIgnoreCase(item.ingredientName)) {
-                    item.weight += ingredient.weight;
+                    additionIngredientWeight(item,ingredient.weight);
                 }
             }
         }
