@@ -12,8 +12,8 @@ public class Menu {
             "2 - Izlistaj recepte",
             "3 - Dodaj namirnicu u frizider",
             "4 - Obrisi namirnicu iz frizidera",
-//            "5 - Dodaj recept",
-//            "6 - Obrisi recept",
+            "5 - Dodaj recept",
+            "6 - Obrisi recept",
             "7 - Sortiraj recepte po tezini (od manje ka vecoj)",
             "8 - Sortiraj recepte po ceni (od manje ka vecoj)",
 //            "9 - Proveri koja sva koje mogu da se naprave",
@@ -23,7 +23,8 @@ public class Menu {
 //            "13 - Proveri koja su sva jela X tezine recepata",
 //            "14 - Proveri koja sva jela mogu da se naprave za X dinara, X tezine",
             "15 - Omiljeni recepti",
-            "16 - Dodaj omiljene recepte"
+            "16 - Dodaj omiljene recepte",
+            "17 - Omiljeni recepti do X dinara"
     };
 
 }
