@@ -128,12 +128,6 @@ public class Application {
                         recipeNew.addIngredientInRecipe(ingredientName, weight);
                     }
                     continue;
-                case 7:
-
-                    continue;
-                case 8:
-
-                    continue;
                 case 15:
                     System.out.println("OMILJENI RECEPTI");
                     for(var recipe: Database.getAllFavoriteRecipe()){
