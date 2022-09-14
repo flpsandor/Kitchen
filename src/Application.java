@@ -70,35 +70,57 @@ public class Application {
                 case 3:
                     sc.nextLine();
                     System.out.println("DODAJ NAMIRNICE: ");
-                    System.out.print("Unesi ime namirnice:");
-                    var ingredientName = sc.nextLine();
-                    System.out.print("Unesi kolicinu:");
-                    var weight = sc.nextDouble();
-                    System.out.print("Unesi cenu: ");
-                    var price = sc.nextDouble();
-                    Database.addIngredient(new WeightedIngredient(ingredientName,weight,price));
+                    System.out.println("Unesi novu namirnicu 1, dopuni kolicine 2");
+                    switch (sc.nextInt()) {
+                        case 1 -> {
+                            sc.nextLine();
+                            System.out.println("UNESI NOVU NAMIRNICU: ");
+                            System.out.print("Unesi ime namirnice:");
+                            var ingredientName = sc.nextLine();
+                            System.out.print("Unesi kolicinu:");
+                            var weight = sc.nextDouble();
+                            System.out.print("Unesi cenu: ");
+                            var price = sc.nextDouble();
+                            Database.addIngredient(new WeightedIngredient(ingredientName, weight, price));
+                            continue;
+                        }
+                        case 2 -> {
+                            sc.nextLine();
+                            System.out.print("Dostupne namirnice: [");
+                            for (var item : Database.getAllIngredients()) {
+                                System.out.print(item.getIngredientName() + " ");
+                            }
+                            System.out.println("]");
+                            System.out.print("Izaberi namirnicu: ");
+                            var ingredientName = sc.nextLine();
+                            System.out.println("Koliku kolicinu dodajes: ");
+                            var weight = sc.nextDouble();
+                            Database.additionIngredientWeight(Database.getIngredient(ingredientName), weight);
+                            continue;
+                        }
+                    }
                     continue;
                 case 4:
                     System.out.println("OBRISI NAMIRNICU: ");
                     System.out.print("Unesi 1 za smanjenje kolicine, 2 za potpuno brisanje:");
-                    switch (sc.nextInt()){
-                        case 1:
+                    switch (sc.nextInt()) {
+                        case 1 -> {
                             sc.nextLine();
                             System.out.print("Unesi namirnicu: ");
-                            ingredientName = sc.nextLine();
+                            var ingredientName = sc.nextLine();
                             System.out.print("Unesi vrednost za smanjenje: ");
-                            weight = sc.nextDouble();
+                            var weight = sc.nextDouble();
                             Database.subtractIngredientWeight(Database.getIngredient(ingredientName), weight);
-                            break;
-                        case 2:
+                            return;
+                        }
+                        case 2 -> {
                             sc.nextLine();
                             System.out.print("Unesi ime namirnice za brisnaje: ");
-                            ingredientName = sc.nextLine();
+                            var ingredientName = sc.nextLine();
                             Database.removeIngredient(ingredientName);
-                            break;
-                        default:
-                            System.out.println("Nepravilan unos");
-                            continue;
+                            return;
+                        }
+                        default -> System.out.println("Nepravilan unos");
                     }
                     continue;
                 case 5:
@@ -122,9 +144,9 @@ public class Application {
                             System.out.print(item.getIngredientName()+", ");
                         }
                         System.out.print("]: ");
-                        ingredientName = sc.nextLine();
+                        var ingredientName = sc.nextLine();
                         System.out.print("Unesi kolicinu sastojka: ");
-                        weight = sc.nextDouble();
+                        var weight = sc.nextDouble();
                         recipeNew.addIngredientInRecipe(ingredientName, weight);
                     }
                     continue;
