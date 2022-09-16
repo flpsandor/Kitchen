@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Database {
@@ -57,18 +58,9 @@ public class Database {
     }
 
     public static void addIngredient(WeightedIngredient ingredient) {
-        if (!ingredientListInDatabase.contains(ingredient.ingredientName)) {
-            ingredientListInDatabase.add(ingredient);
-            Fridge.addInFridge(ingredient);
-        } else {
-            for (var item : ingredientListInDatabase) {
-                if (ingredient.ingredientName.equalsIgnoreCase(item.ingredientName)) {
-                    additionIngredientWeight(item, ingredient.weight);
-                }
-            }
-        }
+        ingredientListInDatabase.add(ingredient);
+        Fridge.addInFridge(ingredient);
     }
-
 
     public static List<WeightedIngredient> getAllIngredients() {
         return new ArrayList<>(ingredientListInDatabase);
@@ -105,11 +97,8 @@ public class Database {
     }
 
     public static void removeRecipe(String recipeName) {
-        for (var recipe : recipeListInDatabase) {
-            if (recipeName.equalsIgnoreCase(recipe.getRecipeName())) {
-                recipeListInDatabase.remove(recipeName);
-            }
-        }
+        recipeListInDatabase.removeIf(recipe -> recipeName.equalsIgnoreCase(recipe.getRecipeName()));
+        favoriteRecipeList.removeIf(recipe -> recipeName.equalsIgnoreCase(recipe.getRecipeName()));
     }
 
     public static void getSortedRecipesByLevel(Level l) {
@@ -122,11 +111,13 @@ public class Database {
         System.out.println(list);
     }
 
+    public static void getSortedRecipesByPrice(String price){
+
+    }
+
     public static void printIngredientListFromFridge(){
         for(var item:Fridge.getIngredientListInFridge()){
             System.out.println(item.getIngredientName()+", "+item.getWeight());
         }
     }
-
-
 }

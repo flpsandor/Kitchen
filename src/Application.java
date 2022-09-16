@@ -135,6 +135,7 @@ public class Application {
                             continue;
                         }
                         case 1-> {
+                            sc.nextLine();
                             System.out.print("Unesi ime recepta: ");
                             var recipeName = sc.nextLine();
                             System.out.print("Unesi tezinu recepta [");
@@ -142,7 +143,7 @@ public class Application {
                                 System.out.print(level+" ");
                             }
                             System.out.println("]");
-                            var level = sc.nextLine();
+                            var level = sc.nextLine().toUpperCase();
                             var recipeNew = new Recipe(recipeName,Level.valueOf(level));
                             System.out.print("Unesi koliko namirnica recept ima: ");
                             var count = sc.nextInt();
@@ -163,6 +164,12 @@ public class Application {
                             System.out.println("NEISPRAVAN UNOS");
                         }
                     }
+                    continue;
+                case 6:
+                    sc.nextLine();
+                    System.out.println("OBRISI RECEPT");
+                    System.out.print("Unesi ime recepta: ");
+                    Database.removeRecipe(sc.nextLine());
                     continue;
                 case 7:
                     System.out.println("SORTIRANI RECEPTI PO TEZINI");
