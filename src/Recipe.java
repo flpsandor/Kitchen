@@ -31,9 +31,9 @@ public class Recipe implements Priceable{
 
     @Override
     public double getPrice() {
-        double price=0;
-        for(var item:ingredientListRecipe){
-            price+=item.getPrice();
+        double price = 0;
+        for (WeightedIngredient ingredient: ingredientListRecipe) {
+            price += ingredient.getPricePerUnit();
         }
         return price;
     }

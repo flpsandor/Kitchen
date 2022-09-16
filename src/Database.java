@@ -7,19 +7,19 @@ public class Database {
     private static final List<Recipe> favoriteRecipeList = new ArrayList<>();
 
     public static void putIngredientInFridge() {
-        for(var item: ingredientListInDatabase){
+        for (var item : ingredientListInDatabase) {
             Fridge.addInFridge(item);
         }
     }
 
-    public static void subtractIngredientWeight(WeightedIngredient ingredient, Double value){
+    public static void subtractIngredientWeight(WeightedIngredient ingredient, Double value) {
         var weight = ingredient.getWeight();
-        ingredient.setWeight(weight-value);
+        ingredient.setWeight(weight - value);
     }
 
-    public static void additionIngredientWeight(WeightedIngredient ingredient, Double value){
+    public static void additionIngredientWeight(WeightedIngredient ingredient, Double value) {
         var weight = ingredient.getWeight();
-        ingredient.setWeight(weight+value);
+        ingredient.setWeight(weight + value);
     }
 
     public static Recipe getFavoriteRecipe(String recipeName) {
@@ -37,7 +37,7 @@ public class Database {
 
     public static void addFavoriteRecipe(String recipeName) {
         for (var recipe : recipeListInDatabase) {
-            if (recipeName.equalsIgnoreCase(recipe.getRecipeName()) && !favoriteRecipeList.contains(recipe)){
+            if (recipeName.equalsIgnoreCase(recipe.getRecipeName()) && !favoriteRecipeList.contains(recipe)) {
                 favoriteRecipeList.add(recipe);
             }
         }
@@ -63,7 +63,7 @@ public class Database {
         } else {
             for (var item : ingredientListInDatabase) {
                 if (ingredient.ingredientName.equalsIgnoreCase(item.ingredientName)) {
-                    additionIngredientWeight(item,ingredient.weight);
+                    additionIngredientWeight(item, ingredient.weight);
                 }
             }
         }
@@ -76,6 +76,7 @@ public class Database {
 
     public static void removeIngredient(String ingredientName) {
         ingredientListInDatabase.removeIf(item -> ingredientName.equalsIgnoreCase(item.getIngredientName()));
+        Fridge.getIngredientListInFridge().removeIf(item -> ingredientName.equalsIgnoreCase(item.getIngredientName()));
     }
 
     public static Recipe getRecipe(String recipeName) {
@@ -97,6 +98,12 @@ public class Database {
         return new ArrayList<>(recipeListInDatabase);
     }
 
+    public static void printAllRecipes(){
+        for(var recipe: recipeListInDatabase){
+            System.out.println(recipe.getRecipeName()+" "+recipe.getPrice());
+        }
+    }
+
     public static void removeRecipe(String recipeName) {
         for (var recipe : recipeListInDatabase) {
             if (recipeName.equalsIgnoreCase(recipe.getRecipeName())) {
@@ -104,4 +111,22 @@ public class Database {
             }
         }
     }
+
+    public static void getSortedRecipesByLevel(Level l) {
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < Database.getAllRecipes().size(); i++) {
+            if (Database.getAllRecipes().get(i).getLevel().equals(l)) {
+                list.add(Database.getAllRecipes().get(i).getRecipeName());
+            }
+        }
+        System.out.println(list);
+    }
+
+    public static void printIngredientListFromFridge(){
+        for(var item:Fridge.getIngredientListInFridge()){
+            System.out.println(item.getIngredientName()+", "+item.getWeight());
+        }
+    }
+
+
 }

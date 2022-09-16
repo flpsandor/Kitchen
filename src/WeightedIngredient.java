@@ -8,6 +8,11 @@ public class WeightedIngredient extends Ingredient{
         this.pricePerUnit = pricePerUnit;
     }
 
+    public WeightedIngredient(String ingredientName, double weight){
+        super(ingredientName);
+        this.weight =  weight;
+    }
+
     public double getWeight() {
         return weight;
     }

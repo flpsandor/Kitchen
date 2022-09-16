@@ -54,79 +54,124 @@ public class Application {
 
             switch (sc.nextInt()) {
                 case 0:
-                    continue;
+                    System.out.println("PROGRAM JE PREKINUT");
+                    isTrue = true;
+                    return;
                 case 1:
                     System.out.println("LISTA NAMIRNICA: ");
-                    for(var item:Database.getAllIngredients()){
-                        System.out.println(item.getIngredientName()+", "+item.getWeight());
-                    }
+                    Database.printIngredientListFromFridge();
                     continue;
                 case 2:
                     System.out.println("LISTA RECEPATA: ");
-                    for(var recipe:Database.getAllRecipes()){
-                        System.out.println(recipe.getRecipeName());
-                    }
+                    Database.printAllRecipes();
                     continue;
                 case 3:
                     sc.nextLine();
                     System.out.println("DODAJ NAMIRNICE: ");
-                    System.out.print("Unesi ime namirnice:");
-                    var ingredientName = sc.nextLine();
-                    System.out.print("Unesi kolicinu:");
-                    var weight = sc.nextDouble();
-                    System.out.print("Unesi cenu: ");
-                    var price = sc.nextDouble();
-                    Database.addIngredient(new WeightedIngredient(ingredientName,weight,price));
+                    System.out.println("Unesi 1 za novu namirnicu, 2 za postojecu, 0 za nazad");
+                    switch (sc.nextInt()) {
+                        case 0 ->{
+                            continue;
+                        }
+                        case 1 -> {
+                            sc.nextLine();
+                            System.out.print("Unesi ime namirnice:");
+                            var ingredientName = sc.nextLine();
+                            System.out.print("Unesi kolicinu:");
+                            var weight = sc.nextDouble();
+                            System.out.print("Unesi cenu: ");
+                            var price = sc.nextDouble();
+                            Database.addIngredient(new WeightedIngredient(ingredientName, weight, price));
+                            continue;
+                        }
+                        case 2 -> {
+                            sc.nextLine();
+                            System.out.println("Unesi ime postojece namirnice: ");
+                            var ingredientName = sc.nextLine();
+                            System.out.print("Unesi kolicinu:");
+                            var weight = sc.nextDouble();
+                            Database.additionIngredientWeight(Database.getIngredient(ingredientName), weight);
+                            continue;
+                        }
+                        default -> {
+                            System.out.println("Nepravilan unos");
+                        }
+                    }
                     continue;
                 case 4:
                     System.out.println("OBRISI NAMIRNICU: ");
-                    System.out.print("Unesi 1 za smanjenje kolicine, 2 za potpuno brisanje:");
-                    switch (sc.nextInt()){
-                        case 1:
+                    System.out.print("Unesi 1 za smanjenje kolicine, 2 za potpuno brisanje, 0 za nazad:");
+                    switch (sc.nextInt()) {
+                        case 0 -> {
+                            continue;
+                        }
+                        case 1 -> {
                             sc.nextLine();
                             System.out.print("Unesi namirnicu: ");
-                            ingredientName = sc.nextLine();
+                            var ingredientName = sc.nextLine();
                             System.out.print("Unesi vrednost za smanjenje: ");
-                            weight = sc.nextDouble();
+                            var weight = sc.nextDouble();
                             Database.subtractIngredientWeight(Database.getIngredient(ingredientName), weight);
-                            break;
-                        case 2:
+                            continue;
+                        }
+                        case 2 -> {
                             sc.nextLine();
                             System.out.print("Unesi ime namirnice za brisnaje: ");
-                            ingredientName = sc.nextLine();
+                            var ingredientName = sc.nextLine();
                             Database.removeIngredient(ingredientName);
-                            break;
-                        default:
-                            System.out.println("Nepravilan unos");
                             continue;
+                        }
+                        default -> {
+                            System.out.println("Nepravilan unos");
+                        }
                     }
                     continue;
                 case 5:
                     sc.nextLine();
                     System.out.println("DODAJ RECEPT");
-                    System.out.print("Unesi ime recepta: ");
-                    var recipeName = sc.nextLine();
-                    System.out.print("Unesi tezinu recepta [");
-                    for(var level:Level.values()){
-                        System.out.print(level+" ");
-                   }
-                    System.out.println("]");
-                    var level = sc.nextLine();
-                    var recipeNew = new Recipe(recipeName,Level.valueOf(level));
-                    System.out.print("Unesi koliko namirnica recept ima: ");
-                    var count = sc.nextInt();
-                    for(int i=0;i<count;i++){
-                        sc.nextLine();
-                        System.out.print("Unesi naziv sastojka: [");
-                        for(var item: Database.getAllIngredients()){
-                            System.out.print(item.getIngredientName()+", ");
+                    System.out.println("1 za unos, 0 za nazad");
+                    switch(sc.nextInt()){
+                        case 0 -> {
+                            continue;
                         }
-                        System.out.print("]: ");
-                        ingredientName = sc.nextLine();
-                        System.out.print("Unesi kolicinu sastojka: ");
-                        weight = sc.nextDouble();
-                        recipeNew.addIngredientInRecipe(ingredientName, weight);
+                        case 1-> {
+                            System.out.print("Unesi ime recepta: ");
+                            var recipeName = sc.nextLine();
+                            System.out.print("Unesi tezinu recepta [");
+                            for(var level:Level.values()){
+                                System.out.print(level+" ");
+                            }
+                            System.out.println("]");
+                            var level = sc.nextLine();
+                            var recipeNew = new Recipe(recipeName,Level.valueOf(level));
+                            System.out.print("Unesi koliko namirnica recept ima: ");
+                            var count = sc.nextInt();
+                            for(int i=0;i<count;i++){
+                                sc.nextLine();
+                                System.out.print("Unesi naziv sastojka: [");
+                                for(var item: Database.getAllIngredients()){
+                                    System.out.print(item.getIngredientName()+", ");
+                                }
+                                System.out.print("]: ");
+                                var ingredientName = sc.nextLine();
+                                System.out.print("Unesi kolicinu sastojka: ");
+                                var weight = sc.nextDouble();
+                                recipeNew.addIngredientInRecipe(ingredientName, weight);
+                            }
+                        }
+                        default -> {
+                            System.out.println("NEISPRAVAN UNOS");
+                        }
                     }
+                    continue;
+                case 7:
+                    System.out.println("SORTIRANI RECEPTI PO TEZINI");
+                    System.out.print("Unesi tezinu recepat, [");
+                    for(var l: Level.values()){
+                        System.out.print(l+" ");
+                    }
+                    System.out.println("]: ");
+                    Database.getSortedRecipesByLevel(Level.valueOf(sc.next().toUpperCase()));
                     continue;
                 case 15:
                     System.out.println("OMILJENI RECEPTI");
@@ -140,14 +185,22 @@ public class Application {
                         System.out.print(recipe.getRecipeName()+" ");
                     }
                     System.out.println("]");
-                    sc.nextLine();
-                    System.out.println("Unesi recept koji je ponudjen: ");
-                    recipeName = sc.nextLine();
-                    Database.addFavoriteRecipe(recipeName);
+                    System.out.println("0 za nazad, 1 za unos");
+                    switch(sc.nextInt()){
+                        case 0:
+                            continue;
+                        case 1:
+                            sc.nextLine();
+                            System.out.println("Unesi recept koji je ponudjen: ");
+                            var recipeName = sc.nextLine();
+                            Database.addFavoriteRecipe(recipeName);
+                        default:
+                            System.out.println("NEISPRAVAN UNOS");
+                    }
                     continue;
                 default:
-                    isTrue = true;
-                    break;
+                    System.out.println("NEISPRAVAN UNOS");
+                    continue;
             }
         }
     }

@@ -16,4 +16,6 @@ public class Fridge {
     public static void removeInFridge(String ingredientName){
         ingredientListInFridge.removeIf(item -> item.ingredientName.equalsIgnoreCase(ingredientName));
     }
+
+
 }
