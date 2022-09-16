@@ -19,10 +19,9 @@ public class Menu {
             "9 - Dodaj omiljene recepte",
             "10 - Omiljeni recepti do X dinara",
             "11 - Proveri koja sva jela mogu da se naprave za X dinara",
-            "12 - Proveri koja sva jela mogu da se naprave za X dinara, X tezine"
-//            "8 - Sortiraj recepte po ceni (od manje ka vecoj)",
-//            "9 - Proveri koja sva koje mogu da se naprave",
-//            "10 - Proveri koja sva jela mogu da se naprave (skaliranje)",
+            "12 - Proveri koja sva jela mogu da se naprave za X dinara, X tezine",
+            "13 - Proveri koja sva koje mogu da se naprave",
+            "14 - Skaliraj jelo",
 //            "11 - Pravljenje jela",
 //
 

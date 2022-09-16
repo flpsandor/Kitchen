@@ -21,6 +21,7 @@ public class Application {
         Database.addIngredient(new WeightedIngredient("projinoBrasno", 1, 90));
         Database.addIngredient(new WeightedIngredient("jogurt", 1.7, 120));
         Database.addIngredient(new WeightedIngredient("nes", 0.25, 600));
+        Database.addIngredient(new WeightedIngredient("makarone", 3, 60));
 
 
         Recipe recipe1 = new Recipe("Proja", Level.EASY);
@@ -41,9 +42,31 @@ public class Application {
         recipe5.addIngredientInRecipe("luk", 0.2);
         recipe5.addIngredientInRecipe("krompir", 0.5);
         recipe5.addIngredientInRecipe("mleko", 0.1);
+        Recipe recipe6 = new Recipe("pica", Level.EASY);
+        recipe6.addIngredientInRecipe("brasno", 0.4);
+        recipe6.addIngredientInRecipe("jaja",3);
+        recipe6.addIngredientInRecipe("paradajz", 0.1);
+        recipe6.addIngredientInRecipe("sir", 0.2);
+        Recipe recipe7 = new Recipe("makaroneSaSirom");
+        recipe7.addIngredientInRecipe("makarone",1);
+        recipe7.addIngredientInRecipe("sir", 0.2);
+        Recipe recipe8  = new Recipe("przenice");
+        recipe8.addIngredientInRecipe("brasno", 0.2);
+        recipe8.addIngredientInRecipe("jaja", 4);
+        recipe8.addIngredientInRecipe("zejtin", 0.05);
+        Recipe recipe9 = new Recipe("palacinke");
+        recipe9.addIngredientInRecipe("brasno", 0.5);
+        recipe9.addIngredientInRecipe("zejtin", 0.2);
+        recipe9.addIngredientInRecipe("mleko", 0.3);
+        Recipe recipe10 = new Recipe("punjenePaprike");
+        recipe10.addIngredientInRecipe("paprika", 0.5);
+        recipe10.addIngredientInRecipe("luk", 0.2);
+        recipe10.addIngredientInRecipe("meso", 1);
+
 
 
         Database.addFavoriteRecipe("omlet");
+        Database.addFavoriteRecipe("pica");
 
 
         Scanner sc = new Scanner(System.in);
@@ -226,6 +249,15 @@ public class Application {
                     System.out.print("Unesi tezinu recepta: ");
                     var level = sc.nextLine();
                     Database.getAllRecipeUpToPriceAndLevel(price, level);
+                    continue;
+                case 14:
+                    sc.nextLine();
+                    System.out.println("SKALIRANJE");
+                    System.out.print("Unesi ime recepta: ");
+                    var recipeName = sc.nextLine();
+                    System.out.print("Unesi vrednost skaliranja: ");
+                    var scale = sc.nextDouble();
+
                 default:
                     System.out.println("NEISPRAVAN UNOS");
                     continue;
