@@ -29,8 +29,8 @@ public class WeightedIngredient extends Ingredient{
         this.pricePerUnit = pricePerUnit;
     }
 
-    public WeightedIngredient withScaledWeight(double procentage) {
-        return new WeightedIngredient(getIngredientName(), weight * (procentage / 100), pricePerUnit);
+    public WeightedIngredient ScaledWeight(double value) {
+        return new WeightedIngredient(getIngredientName(), weight * (value / 100), pricePerUnit);
     }
 
     @Override

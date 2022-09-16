@@ -52,10 +52,10 @@ public class Recipe implements Priceable{
         }
     }
 
-    public Recipe getScaledRecipe(double procentage) {
+    public Recipe getScaledRecipe(double value) {
         Recipe scaledRecipe = new Recipe(this.recipeName);
         for (WeightedIngredient weightedIngredient : this.ingredientListRecipe){
-            weightedIngredient.withScaledWeight(procentage);
+            weightedIngredient.ScaledWeight(value);
         }
         scaledRecipe.level=this.level;
         return scaledRecipe;
