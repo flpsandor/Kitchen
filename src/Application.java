@@ -172,7 +172,7 @@ public class Application {
                     Database.removeRecipe(sc.nextLine());
                     continue;
                 case 7:
-                    System.out.println("SORTIRANI RECEPTI PO TEZINI");
+                    System.out.println("PROVERI KOJA SU SVA JELA X TEZINE RECEPATA");
                     System.out.print("Unesi tezinu recepat, [");
                     for(var l: Level.values()){
                         System.out.print(l+" ");
@@ -180,13 +180,13 @@ public class Application {
                     System.out.println("]: ");
                     Database.getSortedRecipesByLevel(Level.valueOf(sc.next().toUpperCase()));
                     continue;
-                case 15:
+                case 8:
                     System.out.println("OMILJENI RECEPTI");
                     for(var recipe: Database.getAllFavoriteRecipe()){
                         System.out.println(recipe.getRecipeName());
                     }
                     continue;
-                case 16:
+                case 9:
                     System.out.print("DODAJ OMILJENI RECEPT [");
                     for(var recipe:Database.getAllRecipes()){
                         System.out.print(recipe.getRecipeName()+" ");
@@ -201,10 +201,31 @@ public class Application {
                             System.out.println("Unesi recept koji je ponudjen: ");
                             var recipeName = sc.nextLine();
                             Database.addFavoriteRecipe(recipeName);
+                            continue;
                         default:
                             System.out.println("NEISPRAVAN UNOS");
                     }
                     continue;
+                case 10:
+                    sc.nextLine();
+                    System.out.println("OMILJENI RECEPTI DO X DINARA");
+                    System.out.print("Unesi krajnju cenu: ");
+                    Database.getFavoriteRecipeUptoPrice(sc.nextDouble());
+                    continue;
+                case 11:
+                    sc.nextLine();
+                    System.out.println("PROVERI KOJA SVA JELA MOGU DA SE NAPRAVE ZA X DINARA");
+                    System.out.print("Unesi krajnju cenu: ");
+                    Database.getAllRecipeUptoPrice(sc.nextDouble());
+                    continue;
+                case 12:
+                    sc.nextLine();
+                    System.out.println("PROVERI KOJA SVA JELA MOGU DA SE NAPRAVE ZA X dinara, X tezine");
+                    System.out.print("Unesi krajnju cenu: ");
+                    var price = sc.nextDouble();
+                    System.out.print("Unesi tezinu recepta: ");
+                    var level = sc.nextLine();
+                    Database.getAllRecipeUpToPriceAndLevel(price, level);
                 default:
                     System.out.println("NEISPRAVAN UNOS");
                     continue;

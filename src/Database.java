@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Database {
     private static final List<WeightedIngredient> ingredientListInDatabase = new ArrayList<>();
@@ -46,6 +47,30 @@ public class Database {
 
     public static List<Recipe> getAllFavoriteRecipe() {
         return new ArrayList<>(favoriteRecipeList);
+    }
+
+    public static void getFavoriteRecipeUptoPrice(double price){
+        for(var recipe: favoriteRecipeList){
+            if(recipe.getPrice()<=price){
+                System.out.println(recipe.getRecipeName()+" ");
+            }
+        }
+    }
+
+    public static void getAllRecipeUptoPrice(double price){
+        for(var recipe:recipeListInDatabase){
+            if(recipe.getPrice()<=price){
+                System.out.println(recipe.getRecipeName()+" ");
+            }
+        }
+    }
+
+    public static void getAllRecipeUpToPriceAndLevel(double price, String level){
+        for(var recipe:recipeListInDatabase){
+            if(recipe.getPrice()<=price && (recipe.getLevel() == (Level.valueOf(level.toUpperCase())))){
+                System.out.println(recipe.getRecipeName()+" ");
+            }
+        }
     }
 
     public static WeightedIngredient getIngredient(String ingredientName) {
@@ -120,4 +145,5 @@ public class Database {
             System.out.println(item.getIngredientName()+", "+item.getWeight());
         }
     }
+
 }
