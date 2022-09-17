@@ -1,4 +1,5 @@
 import javax.xml.crypto.Data;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -256,8 +257,25 @@ public class Application {
                     System.out.print("Unesi ime recepta: ");
                     var recipeName = sc.nextLine();
                     System.out.print("Unesi vrednost skaliranja: ");
-                    var scale = sc.nextDouble();
-
+                    var value = sc.nextDouble();
+                    for(var recipe: Database.getAllRecipes()){
+                        if(recipe.getRecipeName().equalsIgnoreCase(recipeName)){
+                            recipe.getScaledRecipe(value);
+                            if(Fridge.recipeCheck(recipe, (ArrayList<WeightedIngredient>) Fridge.getIngredientListInFridge())){
+                                System.out.println(recipe.getRecipeName()+" "+recipe.getPrice());
+                            }
+                        }
+                    }
+                    continue;
+                case 15:
+                    sc.nextLine();
+                    System.out.println("MOGUCE JE NAPRAVITI");
+                    for (var recipe : Database.getAllRecipes()) {
+                        if (Fridge.recipeCheck(recipe, (ArrayList<WeightedIngredient>) Fridge.getIngredientListInFridge())) {
+                            System.out.println(recipe.getRecipeName());
+                        }
+                    }
+                    break;
                 default:
                     System.out.println("NEISPRAVAN UNOS");
                     continue;

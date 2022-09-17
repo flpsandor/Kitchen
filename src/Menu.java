@@ -22,7 +22,7 @@ public class Menu {
             "12 - Proveri koja sva jela mogu da se naprave za X dinara, X tezine",
             "13 - Proveri koja sva koje mogu da se naprave",
             "14 - Skaliraj jelo",
-//            "11 - Pravljenje jela",
+            "15 - Pravljenje jela",
 //
 
     };

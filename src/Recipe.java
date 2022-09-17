@@ -13,6 +13,11 @@ public class Recipe implements Priceable{
         Database.addRecipe(this);
     }
 
+    public Recipe(String recipeName, List<WeightedIngredient> ingredientListRecipe){
+        this.recipeName = recipeName;
+        this.ingredientListRecipe =  new ArrayList<>();
+    }
+
     public Recipe(String recipeName) {
         this.recipeName = recipeName;
         this.ingredientListRecipe = new ArrayList<>();
@@ -44,23 +49,17 @@ public class Recipe implements Priceable{
         return price;
     }
 
-    public void getScalled(Recipe recipe, double scale){
-        var name = recipe.getRecipeName()+"scaled";
-        var newRecipe = new Recipe(name, recipe.getLevel());
-        for(var item: recipe.getIngredientListRecipe()){
-            newRecipe.addIngredientInRecipe(item.getIngredientName(),item.getWeight()/(100 * scale));
+    public void getScaledRecipe(double value) {
+        Recipe scaledRecipe = new Recipe(recipeName, ingredientListRecipe);
+
+        for (WeightedIngredient weightedIngredient : this.ingredientListRecipe) {
+            scaledRecipe.ingredientListRecipe.add(new WeightedIngredient(weightedIngredient.getIngredientName(), ((weightedIngredient.getWeight())*value)/100, weightedIngredient.getPricePerUnit()*(value/100)));
         }
     }
 
-    public Recipe getScaledRecipe(double value) {
-        Recipe scaledRecipe = new Recipe(this.recipeName);
-        for (WeightedIngredient weightedIngredient : this.ingredientListRecipe){
-            weightedIngredient.ScaledWeight(value);
-        }
-        scaledRecipe.level=this.level;
-        return scaledRecipe;
+    public void setLevel(Level level) {
+        this.level = level;
     }
-
 
     @Override
     public String toString() {

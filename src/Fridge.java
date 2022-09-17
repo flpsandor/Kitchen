@@ -17,5 +17,16 @@ public class Fridge {
         ingredientListInFridge.removeIf(item -> item.ingredientName.equalsIgnoreCase(ingredientName));
     }
 
+    public static boolean recipeCheck(Recipe recipe, ArrayList<WeightedIngredient> ingredientinFridge) {
+        for (WeightedIngredient checkRecipe : recipe.getIngredientListRecipe()) {
+            for (WeightedIngredient checkFridge : ingredientinFridge) {
+                if (checkFridge.getIngredientName().equalsIgnoreCase(checkRecipe.getIngredientName()) && checkFridge.getWeight() >= checkRecipe.getWeight()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
 }
