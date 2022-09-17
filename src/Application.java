@@ -262,20 +262,24 @@ public class Application {
                         if(recipe.getRecipeName().equalsIgnoreCase(recipeName)){
                             recipe.getScaledRecipe(value);
                             if(Fridge.recipeCheck(recipe, (ArrayList<WeightedIngredient>) Fridge.getIngredientListInFridge())){
-                                System.out.println(recipe.getRecipeName()+" "+recipe.getPrice());
+                                System.out.println("Uspesno skaliranje, pogledajte upis u listi recepata");
                             }
                         }
                     }
                     continue;
                 case 15:
                     sc.nextLine();
-                    System.out.println("MOGUCE JE NAPRAVITI");
+                    System.out.println("PRAVLJENJE JELA");
+                    System.out.println("Moguce je napraviti: ");
                     for (var recipe : Database.getAllRecipes()) {
                         if (Fridge.recipeCheck(recipe, (ArrayList<WeightedIngredient>) Fridge.getIngredientListInFridge())) {
-                            System.out.println(recipe.getRecipeName());
+                            System.out.print(recipe.getRecipeName()+ " ");
                         }
                     }
-                    break;
+                    System.out.print("Koje jelo zelite napraviti: ");
+                    Fridge.makeRecipe(sc.nextLine());
+                    System.out.println("Jelo je napravljeno!");
+                    continue;
                 default:
                     System.out.println("NEISPRAVAN UNOS");
                     continue;

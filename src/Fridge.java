@@ -28,5 +28,17 @@ public class Fridge {
         return false;
     }
 
+    public static void makeRecipe(String recipeName){
+        for(var recipe: Database.getAllRecipes()){
+            if(recipe.getRecipeName().equalsIgnoreCase(recipeName)){
+                for(int i=0;i<recipe.getIngredientListRecipe().size();i++){
+                    Database.subtractIngredientWeight(Database.getIngredient(recipe.getIngredientListRecipe().get(i).getIngredientName()), recipe.getIngredientListRecipe().get(i).getWeight());
+                }
+
+            }
+
+        }
+    }
+
 
 }
